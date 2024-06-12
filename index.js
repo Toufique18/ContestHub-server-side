@@ -33,7 +33,15 @@ async function run() {
     await client.connect();
 
     const contestCollection = client.db('contesthub').collection('contest_info');
+    const usersCollection = client.db('contesthub').collection('user');
 
+
+    //user store
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+  });
 
     app.get("/contest_info", async (req, res)=> {
         const coursor = contestCollection.find();
