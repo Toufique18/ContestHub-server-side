@@ -76,6 +76,66 @@ app.get("/users", async (req, res) => {
   }
 });
 
+//user role
+// // Add route to fetch user role for contest creator
+// app.get("/users/role", async (req, res) => {
+//   try {
+//       // Logic to determine the user's role as contest creator
+//       const userRole = "admin"; // Example: hardcoded role for testing
+//       res.json({ role: userRole }); // Send the user's role in JSON format
+//   } catch (error) {
+//       console.error("Error fetching user role for contest creator:", error);
+//       res.status(500).json({ error: "Error fetching user role for contest creator" });
+//   }
+// });
+// // Add route to fetch user role for contest creator
+// app.get("/users/role", async (req, res) => {
+//   try {
+//       // Logic to determine the user's role as contest creator
+//       const userRole = "contest_creator"; // Example: hardcoded role for testing
+//       res.json({ role: userRole }); // Send the user's role in JSON format
+//   } catch (error) {
+//       console.error("Error fetching user role for contest creator:", error);
+//       res.status(500).json({ error: "Error fetching user role for contest creator" });
+//   }
+// });
+
+// // Add route to fetch user role for regular user
+// app.get("/users/role", async (req, res) => {
+//   try {
+//       // Logic to determine the user's role as regular user
+//       const userRole = "user"; // Example: hardcoded role for testing
+//       res.json({ role: userRole }); // Send the user's role in JSON format
+//   } catch (error) {
+//       console.error("Error fetching user role for regular user:", error);
+//       res.status(500).json({ error: "Error fetching user role for regular user" });
+//   }
+// });
+
+
+// Add route to fetch user role
+// Add route to fetch user role
+// Add route to fetch user role
+app.get("/users/role", async (req, res) => {
+  try {
+    const { email } = req.query; // Get email from query parameters
+    const user = await usersCollection.findOne({ email });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    res.json({ role: user.role });
+  } catch (error) {
+    console.error("Error fetching user role:", error);
+    res.status(500).json({ error: "Error fetching user role" });
+  }
+});
+
+
+
+
+
 
     app.get("/contest_info", async (req, res) => {
       const coursor = contestCollection.find();
