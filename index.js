@@ -201,13 +201,18 @@ async function run() {
       }
     });
 
-    // Fetch contests created by a specific user
-    app.get("/fetch-my-contests/:email", async (req, res) => {
-      const result = await pendingCollection.find({ email: req.params.email }).toArray();
-      res.send(result);
-    });
-
-   
+    
+    // Server-side code to fetch accepted contests
+app.get('/fetch-accepted-contests/:email', async (req, res) => {
+    
+    try {
+        const contests = await contestCollection.find({ email: req.params.email }).toArray();
+        res.json(contests);
+    } catch (error) {
+        console.error('Error fetching accepted contests:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
     // Fetch participated contests for a specific user
