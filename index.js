@@ -201,7 +201,12 @@ async function run() {
       }
     });
 
-    
+    // Fetch contests created by a specific user
+    app.get("/fetch-my-contests/:email", async (req, res) => {
+      const result = await pendingCollection.find({ email: req.params.email }).toArray();
+      res.send(result);
+    });
+
     // Server-side code to fetch accepted contests
 app.get('/fetch-accepted-contests/:email', async (req, res) => {
     
@@ -231,12 +236,7 @@ app.get('/fetch-accepted-contests/:email', async (req, res) => {
       }
     });
 
-    // Delete pending contest
-    app.delete("/pending/:id", async (req, res) => {
-      const { id } = req.params;
-      const result = await pendingCollection.deleteOne({ _id: new ObjectId(id) });
-      res.send(result);
-    });
+    
 
     // Fetch all pending contests
     app.get("/pending", async (req, res) => {
