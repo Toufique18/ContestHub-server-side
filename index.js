@@ -50,18 +50,7 @@ async function run() {
     const participationCollection = client.db('contesthub').collection('participation');
 
     // User operations
-    // Endpoint to get the number of contests a user has participated in
-app.get('/participated-contests/:userId', async (req, res) => {
-  const userId = req.params.userId;
-
-  try {
-      const count = await participationCollection.countDocuments({ userId });
-      res.json({ count });
-  } catch (error) {
-      console.error('Error fetching participated contests:', error);
-      res.status(500).json({ error: 'Failed to fetch participated contests' });
-  }
-});
+   
 
 
 // Endpoint to get the number of contests a user has won
